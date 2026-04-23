@@ -1,0 +1,3 @@
+-- Ensure legacy password_hash exists for local password login flows.
+ALTER TABLE users
+ADD COLUMN IF NOT EXISTS password_hash VARCHAR(255) NOT NULL DEFAULT '';
