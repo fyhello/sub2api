@@ -3,6 +3,10 @@
 -- New: [{"email":"a@x.com","disabled":false,"verified":true}, ...]
 -- Existing emails are marked as verified=false (unverified), disabled=false (enabled)
 
+-- Ensure compatibility on installations where this column was not introduced yet.
+ALTER TABLE users
+ADD COLUMN IF NOT EXISTS balance_notify_extra_emails TEXT NOT NULL DEFAULT '[]';
+
 -- 1. User balance notification emails
 UPDATE users
 SET balance_notify_extra_emails = (
